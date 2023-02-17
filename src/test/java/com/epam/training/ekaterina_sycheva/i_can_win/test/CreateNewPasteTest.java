@@ -1,6 +1,6 @@
-package com.epam.training.ekaterina_sycheva.test;
+package com.epam.training.ekaterina_sycheva.i_can_win.test;
 
-import com.epam.training.ekaterina_sycheva.pages.MainPage;
+import com.epam.training.ekaterina_sycheva.i_can_win.pages.MainPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
@@ -10,8 +10,6 @@ import org.testng.annotations.Test;
 public class CreateNewPasteTest {
 
     private WebDriver driver;
-    private String code = "Hello from WebDriver";
-    private String titleCode = "helloweb";
 
     @BeforeTest(alwaysRun = true)
     public void browserSetup(){
@@ -21,6 +19,8 @@ public class CreateNewPasteTest {
 
     @Test
     public void createNewPasteWithoutAuthorization(){
+        String code = "Hello from WebDriver";
+        String titleCode = "helloweb";
         MainPage mainPage = new MainPage(this.driver);
         mainPage.openPage();
         mainPage.enterCode(code);

@@ -1,4 +1,4 @@
-package com.epam.training.ekaterina_sycheva.BringItOn.pages;
+package com.epam.training.ekaterina_sycheva.i_can_win.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
