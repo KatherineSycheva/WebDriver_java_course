@@ -4,6 +4,7 @@ import com.epam.training.ekaterina_sycheva.hurt_me_plenty.pages.CalculatorPage;
 import com.epam.training.ekaterina_sycheva.hurt_me_plenty.pages.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -17,14 +18,17 @@ public class PricingCalculatorTest {
     private String textToSeach = "Google Cloud Platform Pricing Calculator";
     private String provisioningModel = "Regular";
     private String instanceType = "n1-standard-8";
-    private String region = "Frankfurt";
+    private String region = "Madrid";
     private String localSsd = "2x375 GiB";
     private String commitmentTerm = "1 Year";
+    private String totalEstimatedCost = "Total Estimated Cost: USD 6,385.29 per 1 month";
 
     @BeforeTest(alwaysRun = true)
     public void browserSetup(){
         System.setProperty("webdriver.http.factory", "jdk-http-client");
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         homePage = new HomePage(driver);
         homePage.openPage();
@@ -84,6 +88,12 @@ public class PricingCalculatorTest {
     public void checkEnteredCommitmentTerm() {
         Assert.assertEquals(calculatorPage.getCommitmentTerm(), commitmentTerm,
                 "Commitment term is \"" + calculatorPage.getCommitmentTerm() + "\" instead of \"" + commitmentTerm + "\"");
+    }
+
+    @Test
+    public void checkTotalEstimatedCost(){
+        Assert.assertEquals(calculatorPage.getTotalEstimatedCost(), totalEstimatedCost,
+                "Commitment term is \"" + calculatorPage.getTotalEstimatedCost() + "\" instead of \"" + totalEstimatedCost + "\"");
     }
 
 

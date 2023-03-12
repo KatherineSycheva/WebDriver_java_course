@@ -54,7 +54,7 @@ public class CalculatorPage {
     private WebElement selectLocalSSD;
     @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[1]/div[2]/div/md-card/md-card-content/div/div[1]/form/div[16]/div[1]/md-input-container/md-select")
     private WebElement datacenterLocationList;
-    @FindBy(xpath = "/html/body/div[11]/md-select-menu/md-content/md-optgroup/md-option[12]")
+    @FindBy(xpath = "/html/body/div[11]/md-select-menu/md-content/md-optgroup/md-option[14]")
     private WebElement selectDatacenterLocation;
     @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[1]/div[2]/div/md-card/md-card-content/div/div[1]/form/div[19]/div[1]/md-input-container/md-select")
     private WebElement commitedUsageList;
@@ -68,10 +68,12 @@ public class CalculatorPage {
     private WebElement enteredInstanceType;
     @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[2]/md-card/md-card-content/div/div/div/md-content/md-list/md-list-item[1]/div[1]")
     private WebElement enteredRegion;
-    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[2]/md-card/md-card-content/div/div/div/md-content/md-list/md-list-item[7]/div[1]")
+    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[2]/md-card/md-card-content/div/div/div/md-content/md-list/md-list-item[8]/div[1]")
     private WebElement enteredLocalSSD;
     @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[2]/md-card/md-card-content/div/div/div/md-content/md-list/md-list-item[3]/div[1]")
     private WebElement enteredCommitmentTerm;
+    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[2]/md-card/md-card-content/div/div/div/div[1]/h2/b")
+    private WebElement totalEstimatedCost;
 
 
     public CalculatorPage(WebDriver driver) {
@@ -163,6 +165,10 @@ public class CalculatorPage {
 
     public String getCommitmentTerm() {
         return enteredCommitmentTerm.getText().strip().substring(17);
+    }
+
+    public String getTotalEstimatedCost() {
+        return totalEstimatedCost.getText();
     }
 
 }
