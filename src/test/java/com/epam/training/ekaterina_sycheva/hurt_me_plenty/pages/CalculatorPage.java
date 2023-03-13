@@ -22,57 +22,57 @@ public class CalculatorPage {
     private WebElement computeEngine;
     @FindBy(name = "quantity")
     private WebElement inputNumberOfInstances;
-    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[1]/div[2]/div/md-card/md-card-content/div/div[1]/form/div[3]/div[1]/md-input-container/md-select/md-select-value")
+    @FindBy(xpath = "//div[1]/form/div[3]/div[1]/md-input-container/md-select/md-select-value")
     private WebElement operatingSystemsList;
     @FindBy(xpath = "/html/body/div[4]/md-select-menu/md-content/md-option[1]")
     private WebElement selectOperatingSystemType;
-    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[1]/div[2]/div/md-card/md-card-content/div/div[1]/form/div[4]/div[1]/md-input-container/md-select/md-select-value")
+    @FindBy(xpath = "//div/div[1]/form/div[4]/div[1]/md-input-container/md-select/md-select-value")
     private WebElement provisioningModelsList;
     @FindBy(xpath = "/html/body/div[5]/md-select-menu/md-content/md-option[1]")
     private WebElement selectProvisioningModel;
-    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[1]/div[2]/div/md-card/md-card-content/div/div[1]/form/div[6]/div[1]/md-input-container/md-select/md-select-value")
+    @FindBy(xpath = "//div/div[1]/form/div[6]/div[1]/md-input-container/md-select/md-select-value")
     private WebElement seriesList;
     @FindBy(xpath = "/html/body/div[6]/md-select-menu/md-content/md-option[1]")
     private WebElement selectSeries;
-    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[1]/div[2]/div/md-card/md-card-content/div/div[1]/form/div[7]/div[1]/md-input-container/md-select")
+    @FindBy(xpath = "//div/div[1]/form/div[7]/div[1]/md-input-container/md-select")
     private WebElement machineTypeList;
     @FindBy(xpath = "/html/body/div[7]/md-select-menu/md-content/md-optgroup[3]/md-option[4]")
     private WebElement selectMachineType;
-    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[1]/div[2]/div/md-card/md-card-content/div/div[1]/form/div[13]/div[1]/md-input-container/md-checkbox")
+    @FindBy(xpath = "//div/div[1]/form/div[13]/div[1]/md-input-container/md-checkbox")
     private WebElement checkboxAddGPU;
-    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[1]/div[2]/div/md-card/md-card-content/div/div[1]/form/div[14]/div/div[1]/div[1]/md-input-container[1]/md-select")
+    @FindBy(xpath = "//div/div[1]/div[1]/md-input-container[1]/md-select")
     private WebElement gpuTypeList;
     @FindBy(xpath = "/html/body/div[8]/md-select-menu/md-content/md-option[4]")
     private WebElement selectGpuType;
-    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[1]/div[2]/div/md-card/md-card-content/div/div[1]/form/div[14]/div/div[1]/div[1]/md-input-container[2]/md-select")
+    @FindBy(xpath = "//div/div[1]/form/div[14]/div/div[1]/div[1]/md-input-container[2]/md-select")
     private WebElement numberOfGpuList;
     @FindBy(xpath = "/html/body/div[9]/md-select-menu/md-content/md-option[2]")
     private WebElement selectNumberOfGpu;
-    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[1]/div[2]/div/md-card/md-card-content/div/div[1]/form/div[15]/div[1]/md-input-container/md-select")
+    @FindBy(xpath = "//div/div[1]/form/div[15]/div[1]/md-input-container/md-select")
     private WebElement localSSDList;
     @FindBy(xpath = "/html/body/div[10]/md-select-menu/md-content/md-option[3]")
     private WebElement selectLocalSSD;
-    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[1]/div[2]/div/md-card/md-card-content/div/div[1]/form/div[16]/div[1]/md-input-container/md-select")
+    @FindBy(xpath = "//div/div[1]/form/div[16]/div[1]/md-input-container/md-select")
     private WebElement datacenterLocationList;
     @FindBy(xpath = "/html/body/div[11]/md-select-menu/md-content/md-optgroup/md-option[14]")
     private WebElement selectDatacenterLocation;
-    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[1]/div[2]/div/md-card/md-card-content/div/div[1]/form/div[19]/div[1]/md-input-container/md-select")
+    @FindBy(xpath = "//div/div[1]/form/div[19]/div[1]/md-input-container/md-select")
     private WebElement commitedUsageList;
     @FindBy(xpath = "/html/body/div[12]/md-select-menu/md-content/md-option[2]")
     private WebElement selectCommitedUsage;
-    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[1]/div[2]/div/md-card/md-card-content/div/div[1]/form/div[20]/button")
+    @FindBy(xpath = "//div/div[1]/form/div[20]/button")
     private WebElement buttonAddToEstimate;
-    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[2]/md-card/md-card-content/div/div/div/md-content/md-list/md-list-item[4]/div[1]")
+    @FindBy(xpath = "//md-list/md-list-item[4]/div[1]")
     private WebElement enteredProvisioningModel;
-    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[2]/md-card/md-card-content/div/div/div/md-content/md-list/md-list-item[5]/div[1]")
+    @FindBy(xpath = "//md-list/md-list-item[5]/div[1]")
     private WebElement enteredInstanceType;
-    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[2]/md-card/md-card-content/div/div/div/md-content/md-list/md-list-item[1]/div[1]")
+    @FindBy(xpath = "//md-list/md-list-item[1]/div[1]")
     private WebElement enteredRegion;
-    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[2]/md-card/md-card-content/div/div/div/md-content/md-list/md-list-item[8]/div[1]")
+    @FindBy(xpath = "//md-list/md-list-item[8]/div[1]")
     private WebElement enteredLocalSSD;
-    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[2]/md-card/md-card-content/div/div/div/md-content/md-list/md-list-item[3]/div[1]")
+    @FindBy(xpath = "//md-list/md-list-item[3]/div[1]")
     private WebElement enteredCommitmentTerm;
-    @FindBy(xpath = "/html/body/md-content/md-card/div/md-card-content[2]/md-card/md-card-content/div/div/div/div[1]/h2/b")
+    @FindBy(xpath = "//md-card-content[2]/md-card/md-card-content/div/div/div/div[1]/h2/b")
     private WebElement totalEstimatedCost;
 
 
