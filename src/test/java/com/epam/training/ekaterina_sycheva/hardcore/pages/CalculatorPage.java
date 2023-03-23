@@ -89,7 +89,7 @@ public class CalculatorPage {
         frameDriver.switchTo().frame(innerCalculatorFrame);
     }
 
-    public void clickComputeEngineButton() {
+    private void clickComputeEngineButton() {
         computeEngine = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(computeEngine));
         computeEngine.click();
     }
@@ -102,6 +102,12 @@ public class CalculatorPage {
         visibleSelectValue.click();
     }
 
+    public String getTotalEstimatedCost() {
+        String cost = totalEstimatedCost.getText().strip();
+        cost = cost.substring(22, 34);
+        return cost;
+    }
+/*
     public void enterNumberOfInstances(int numberInstances) {
         inputNumberOfInstances.sendKeys(String.valueOf(numberInstances));
     }
@@ -167,9 +173,26 @@ public class CalculatorPage {
 
     public void clickButtonSendEmail() {
         buttonSendEmail.click();
-    }
+    }*/
 
     public void enterValuesToPricingCalculator() {
+        this.clickComputeEngineButton();
+        inputNumberOfInstances.sendKeys("4");
+        this.enterDropDownListValuesToCalculator(operatingSystemsList, selectOperatingSystemType);
+        this.enterDropDownListValuesToCalculator(provisioningModelsList, selectProvisioningModel);
+        this.enterDropDownListValuesToCalculator(seriesList, selectSeries);
+        this.enterDropDownListValuesToCalculator(machineTypeList, selectMachineType);
+        checkboxAddGPU.click();
+        this.enterDropDownListValuesToCalculator(gpuTypeList, selectGpuType);
+        this.enterDropDownListValuesToCalculator(numberOfGpuList, selectNumberOfGpu);
+        this.enterDropDownListValuesToCalculator(localSSDList, selectLocalSSD);
+        this.enterDropDownListValuesToCalculator(datacenterLocationList, selectDatacenterLocation);
+        this.enterDropDownListValuesToCalculator(commitedUsageList, selectCommitedUsage);
+        buttonAddToEstimate.click();
+        buttonEmailEstimate.click();
+    }
+
+ /*   public void enterValuesToPricingCalculator() {
         this.clickComputeEngineButton();
         this.enterNumberOfInstances(4);
         this.enterTypeOfOperatingSystem();
@@ -184,12 +207,13 @@ public class CalculatorPage {
         this.enterCommitedUsage();
         this.clickButtonAddToEstimate();
         this.clickButtonEmailEstimate();
-    }
+    }*/
 
-    public void sendEstimatedCostToMail(String email) {
+    public String sendEstimatedCostToMail(String email) {
         String totalEstimatedCost = this.getTotalEstimatedCost();
-        this.enterEmailToEmailEstimate(email);
-        this.clickButtonSendEmail();
+        fieldEmailEstimate.sendKeys(email);
+        buttonSendEmail.click();
+        return totalEstimatedCost;
     }
 
 }
