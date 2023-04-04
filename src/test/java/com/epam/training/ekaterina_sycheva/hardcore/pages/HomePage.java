@@ -10,24 +10,24 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class HomePage {
+public class HomePage extends BasePage {
 
-    private final WebDriver driver;
-    private static final String url = "https://cloud.google.com/";
-    @FindBy(xpath = "//devsite-search[1]")
+    private final String PAGE_URL = "https://cloud.google.com/";
+    @FindBy(css = ".devsite-top-logo-row-middle > devsite-search")
     private WebElement loupeButton;
     @FindBy(name = "q")
     private WebElement inputField;
-    @FindBy(xpath = "//*[@id=\"___gcse_0\"]/div/div/div/div[5]/div[2]/div/div/div[1]/div[1]/div[1]/div[1]/div/a")
+    @FindBy(xpath = "(//a/b[text()=\"Google Cloud Platform Pricing Calculator\"])[1]")
     private WebElement firstResultOfSearch;
 
     public HomePage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
-    public void openPage(){
-        driver.get(url);
+    @Override
+    public HomePage openPage(){
+        driver.navigate().to(PAGE_URL);
+        return this;
     }
 
     public void openSearchField() {

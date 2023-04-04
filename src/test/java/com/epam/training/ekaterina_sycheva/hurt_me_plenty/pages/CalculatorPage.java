@@ -54,7 +54,7 @@ public class CalculatorPage {
     private WebElement selectLocalSSD;
     @FindBy(xpath = "//div/div[1]/form/div[16]/div[1]/md-input-container/md-select")
     private WebElement datacenterLocationList;
-    @FindBy(xpath = "/html/body/div[11]/md-select-menu/md-content/md-optgroup/md-option[14]")
+    @FindBy(xpath = "/html/body/div[11]/md-select-menu/md-content/md-optgroup/md-option[26]")
     private WebElement selectDatacenterLocation;
     @FindBy(xpath = "//div/div[1]/form/div[19]/div[1]/md-input-container/md-select")
     private WebElement commitedUsageList;
@@ -68,7 +68,7 @@ public class CalculatorPage {
     private WebElement enteredInstanceType;
     @FindBy(xpath = "//md-list/md-list-item[1]/div[1]")
     private WebElement enteredRegion;
-    @FindBy(xpath = "//md-list/md-list-item[8]/div[1]")
+    @FindBy(xpath = "//md-list/md-list-item[7]/div[1]")
     private WebElement enteredLocalSSD;
     @FindBy(xpath = "//md-list/md-list-item[3]/div[1]")
     private WebElement enteredCommitmentTerm;

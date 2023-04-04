@@ -18,16 +18,15 @@ public class PricingCalculatorTest {
     private String textToSeach = "Google Cloud Platform Pricing Calculator";
     private String provisioningModel = "Regular";
     private String instanceType = "n1-standard-8";
-    private String region = "Madrid";
+    private String region = "Frankfurt";
     private String localSsd = "2x375 GiB";
     private String commitmentTerm = "1 Year";
-    private String totalEstimatedCost = "Total Estimated Cost: USD 6,385.29 per 1 month";
+    private String totalEstimatedCost = "Total Estimated Cost: USD 1,081.20 per 1 month";
 
     @BeforeTest(alwaysRun = true)
     public void browserSetup(){
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--incognito");
+        options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         homePage = new HomePage(driver);
@@ -99,7 +98,7 @@ public class PricingCalculatorTest {
 
     @AfterTest(alwaysRun = true)
     public void browserTearDown() {
-        driver.quit();
-        driver = null;
+/*        driver.quit();
+        driver = null;*/
     }
 }

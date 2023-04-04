@@ -3,6 +3,7 @@ package com.epam.training.ekaterina_sycheva.bring_it_on.test;
 import com.epam.training.ekaterina_sycheva.bring_it_on.pages.MainPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -20,7 +21,9 @@ public class CreateNewPasteTest {
 
     @BeforeTest(alwaysRun = true)
     public void browserSetup(){
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         mainPage = new MainPage(driver);
         mainPage.createNewPaste(code, titleCode);
@@ -28,7 +31,7 @@ public class CreateNewPasteTest {
 
     @Test
     public void browserTitleEqualPasteName() {
-        Assert.assertTrue(mainPage.getPageTitle().contains(titleCode), "Title of created page doesn't equal to entered. Must be: " + code + " received: " + mainPage.getPageTitle());
+        Assert.assertTrue(mainPage.getPageTitle().contains(titleCode), "Title of created page doesn't equal to entered");
     }
 
     @Test
@@ -39,7 +42,7 @@ public class CreateNewPasteTest {
     @Test
     public void codeEqualsEntered(){
         Assert.assertEquals(mainPage.getPastedCode().strip(), code.strip(),
-                "Code on the page doesn't equal to entered. Must be: \n" + code + "\nbut received: \n" +  mainPage.getPastedCode());
+                "Code on the page doesn't equal to entered");
     }
 
     @AfterTest(alwaysRun = true)

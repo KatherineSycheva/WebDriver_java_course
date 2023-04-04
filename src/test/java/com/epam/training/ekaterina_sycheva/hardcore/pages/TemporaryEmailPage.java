@@ -7,12 +7,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class TemporaryEmailPage {
 
-    WebDriver driver;
+    private WebDriver driver;
     private static final String url = "https://yopmail.com/";
     @FindBy(css = "a[title=\"Генератор Одноразовых адресов электронной почты создаёт новый адрес для вас за один клик!\"]")
     private WebElement emailGenerator;
@@ -22,12 +21,12 @@ public class TemporaryEmailPage {
     private WebElement buttonCheckMail;
     @FindBy(id = "refresh")
     private WebElement buttonRefresh;
-    @FindBy(xpath = "/html/body/div[2]/div[2]/button")
+    @FindBy(css = ".lm")
     private WebElement buttonLetter;
     @FindBy(id = "nbmail")
     private WebElement numberOfMessagesInMail;
     private WebElement mailEstimatedMonthlyCost;
-    @FindBy(xpath = "/html/body/div[1]/div/main/div[2]/div[3]/div/div[1]/iframe")
+    @FindBy(name = "ifinbox")
     private WebElement frameInbox;
 
 
@@ -40,18 +39,10 @@ public class TemporaryEmailPage {
         driver.get(url);
     }
 
-    public void clickEmailGenerator() {
-        emailGenerator.click();
-    }
-
-    public String getGeneratedEmail() {
-        return generatedEmail.getText();
-    }
-
     public String generateEmail()  {
         this.openPage();
-        this.clickEmailGenerator();
-        return this.getGeneratedEmail();
+        emailGenerator.click();
+        return generatedEmail.getText();
     }
 
     public void clickButtonCheckMail() {
@@ -71,7 +62,4 @@ public class TemporaryEmailPage {
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/main/div/div/div/div/table/tbody/tr[2]/td/table/tbody/tr[2]/td[2]/h3")));
         return mailEstimatedMonthlyCost.getText();
     }
-
-
-
 }
