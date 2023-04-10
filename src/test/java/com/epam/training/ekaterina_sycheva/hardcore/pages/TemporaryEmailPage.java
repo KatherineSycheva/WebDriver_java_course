@@ -9,10 +9,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
-public class TemporaryEmailPage {
+public class TemporaryEmailPage extends BasePage {
 
-    private WebDriver driver;
-    private static final String url = "https://yopmail.com/";
+    private static final String PAGE_URL = "https://yopmail.com/";
     @FindBy(css = "a[title=\"Генератор Одноразовых адресов электронной почты создаёт новый адрес для вас за один клик!\"]")
     private WebElement emailGenerator;
     @FindBy(id = "geny")
@@ -25,18 +24,21 @@ public class TemporaryEmailPage {
     private WebElement buttonLetter;
     @FindBy(id = "nbmail")
     private WebElement numberOfMessagesInMail;
-    private WebElement mailEstimatedMonthlyCost;
-    @FindBy(name = "ifinbox")
+    @FindBy(css = "#ifmail")
     private WebElement frameInbox;
+    @FindBy(css = "table > tbody > tr:nth-child(1) > td:nth-child(4)")
+    private WebElement mailEstimatedMonthlyCost;
 
 
     public TemporaryEmailPage(WebDriver driver){
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
     }
 
-    public void openPage(){
-        driver.get(url);
+    @Override
+    public TemporaryEmailPage openPage(){
+        driver.navigate().to(PAGE_URL);
+        return this;
     }
 
     public String generateEmail()  {
@@ -45,21 +47,23 @@ public class TemporaryEmailPage {
         return generatedEmail.getText();
     }
 
-    public void clickButtonCheckMail() {
+    public void clickButtonCheckMail() throws InterruptedException {
         buttonCheckMail.click();
         numberOfMessagesInMail = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.visibilityOf(numberOfMessagesInMail));
         String messages = numberOfMessagesInMail.getText();
-        while (messages.equals("0 mail")){
+        int counterOfClick = 0;
+        while ((messages.equals("0 mail")) && (counterOfClick < 1000)){
             buttonRefresh.click();
+            Thread.sleep(500);
             messages = numberOfMessagesInMail.getText();
         }
     }
 
     public String getEstimatedMonthlyCostFromMail() {
-        WebDriver frameDriver = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frameInbox));
-        mailEstimatedMonthlyCost = new WebDriverWait(frameDriver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/main/div/div/div/div/table/tbody/tr[2]/td/table/tbody/tr[2]/td[2]/h3")));
+        driver = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frameInbox));
+        mailEstimatedMonthlyCost = new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOf(mailEstimatedMonthlyCost));
         return mailEstimatedMonthlyCost.getText();
     }
 }

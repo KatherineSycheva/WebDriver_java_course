@@ -9,16 +9,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class CalculatorPage {
-    private final WebDriver driver;
+public class CalculatorPage extends BasePage {
     private WebDriver frameDriver;
-
 
     @FindBy(css = "devsite-iframe > iframe")
     private WebElement calculatorFrame;
     @FindBy(id = "myFrame")
     private  WebElement innerCalculatorFrame;
-    @FindBy(css = "md-tab-item:has(div[title=\"Compute Engine\"])")
+    //@FindBy(css = "md-tab-item:has(div[title=\"Compute Engine\"])")
+    @FindBy(css = "md-tab-item[md-tab-id=\"1\"]")
     private WebElement computeEngine;
     @FindBy(name = "quantity")
     private WebElement inputNumberOfInstances;
@@ -68,15 +67,21 @@ public class CalculatorPage {
     private WebElement buttonEmailEstimate;
     @FindBy(css = "input[ng-model=\"emailQuote.user.email\"]")
     private WebElement fieldEmailEstimate;
-    @FindBy(xpath = "md-dialog-actions > button:nth-child(2)")
+    @FindBy(css = "form[name=\"emailForm\"] > md-dialog-actions > button:nth-child(2)")
     private WebElement buttonSendEmail;
 
 
     public CalculatorPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver,this);
         frameDriver = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(calculatorFrame));
         frameDriver.switchTo().frame(innerCalculatorFrame);
+    }
+
+    @Override
+    public CalculatorPage openPage()
+    {
+        return this;
     }
 
     private void clickComputeEngineButton() {

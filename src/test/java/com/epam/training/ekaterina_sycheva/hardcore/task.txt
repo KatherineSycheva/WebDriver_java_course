@@ -1,0 +1,16 @@
+Что должно быть в итоговом фреймворке:
+
+webdrivermanager для управления коннекторам к браузерам
+Page Object / Page Factory для абстракций страниц
+Модель для бизнес-объектов необходимых сущностей
+properties файлы с тестовыми данным для разных окружений (как минимум 2)
+xml suites для smoke тестов и всех тестов
+При падении теста должен быть сделан скриншот с датой и временем
+Фреймворк должен иметь возможность запуска с Jenkins и параметризацией браузера, тест suite, environment.
+Результаты тестов должны быть на графике джобы, скриншоты должны быть заархивированны как артефакты
+
+
+cd C:\test\java\WebDriver_java_course
+mvn -Dbrowser=chrome -Dsurefire.suiteXmlFiles=src/test/resources/testng-all.xml clean test
+mvn -Dbrowser=edge -Dsurefire.suiteXmlFiles=src/test/resources/testng-all.xml clean test
+mvn -Dbrowser=firefox -Dsurefire.suiteXmlFiles=src/test/resources/testng-all.xml clean test
