@@ -1,5 +1,6 @@
 package com.epam.training.ekaterina_sycheva.hardcore.driver;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,7 +12,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class DriverSingleton {
 
-    private static final String RESOURCE_PATH = "src\\test\\resources\\";
     private static WebDriver driver;
 
     public static WebDriver getDriver()  {
@@ -19,14 +19,14 @@ public class DriverSingleton {
         if (driver == null)  {
             switch (browser) {
                 case "edge": {
-                    System.setProperty("webdriver.edge.driver", RESOURCE_PATH + "msedgedriver.exe");
+                    WebDriverManager.edgedriver().setup();
                     EdgeOptions options = new EdgeOptions();
                     options.addArguments("--remote-allow-origins=*");
                     driver = new EdgeDriver(options);
                     break;
                 }
-                case "chrome": {
-                    System.setProperty("webdriver.chrome.driver", RESOURCE_PATH + "chromedriver.exe");
+                default: {
+                    WebDriverManager.chromedriver().setup();
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--remote-allow-origins=*");
                     driver = new ChromeDriver(options);
