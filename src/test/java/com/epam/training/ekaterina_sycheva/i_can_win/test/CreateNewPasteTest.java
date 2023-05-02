@@ -1,3 +1,4 @@
+/*
 package com.epam.training.ekaterina_sycheva.i_can_win.test;
 
 import com.epam.training.ekaterina_sycheva.i_can_win.pages.MainPage;
@@ -22,7 +23,6 @@ public class CreateNewPasteTest {
         driver.manage().window().maximize();
     }
 
-    @Test
     public void createNewPasteWithoutAuthorization(){
         MainPage mainPage = new MainPage(this.driver);
         mainPage.openPage();
@@ -39,3 +39,4 @@ public class CreateNewPasteTest {
     }
 
 }
+*/

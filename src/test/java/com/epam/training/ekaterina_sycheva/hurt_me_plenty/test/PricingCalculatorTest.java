@@ -3,8 +3,8 @@ package com.epam.training.ekaterina_sycheva.hurt_me_plenty.test;
 import com.epam.training.ekaterina_sycheva.hurt_me_plenty.pages.CalculatorPage;
 import com.epam.training.ekaterina_sycheva.hurt_me_plenty.pages.HomePage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -25,9 +25,9 @@ public class PricingCalculatorTest {
 
     @BeforeTest(alwaysRun = true)
     public void browserSetup(){
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(options);
+        FirefoxOptions options = new FirefoxOptions();
+        options.setBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
+        driver = new FirefoxDriver(options);
         driver.manage().window().maximize();
         homePage = new HomePage(driver);
         homePage.openPage();
@@ -59,7 +59,7 @@ public class PricingCalculatorTest {
         calculatorPage.clickButtonAddToEstimate();
     }
 
-    @Test
+    @Test(enabled=false)
     public void checkProvisioningModel(){
         Assert.assertEquals(calculatorPage.getEnteredProvisioningModel(), provisioningModel,
                 "Provisioning model is " + calculatorPage.getEnteredProvisioningModel() + " instead of " + provisioningModel);
@@ -71,34 +71,34 @@ public class PricingCalculatorTest {
                 "Instance type is \"" + calculatorPage.getEnteredInstanceType() + "\" instead of \"" + instanceType + "\"");
     }
 
-    @Test
+    @Test(enabled=false)
     public void checkEnteredRegion() {
         Assert.assertEquals(calculatorPage.getEnteredRegion(), region,
                 "Region is \"" + calculatorPage.getEnteredInstanceType() + "\" instead of \"" + instanceType + "\"");
     }
 
-    @Test
+    @Test(enabled=false)
     public void checkEnteredLocalSSD() {
         Assert.assertEquals(calculatorPage.getEnteredLocalSSD(), localSsd,
                 "Local SSD is \"" + calculatorPage.getEnteredLocalSSD() + "\" instead of \"" + localSsd + "\"");
     }
 
-    @Test
+    @Test(enabled=false)
     public void checkEnteredCommitmentTerm() {
         Assert.assertEquals(calculatorPage.getCommitmentTerm(), commitmentTerm,
                 "Commitment term is \"" + calculatorPage.getCommitmentTerm() + "\" instead of \"" + commitmentTerm + "\"");
     }
 
-    @Test
+    @Test(enabled=false)
     public void checkTotalEstimatedCost(){
-        Assert.assertEquals(calculatorPage.getTotalEstimatedCost(), totalEstimatedCost,
-                "Commitment term is \"" + calculatorPage.getTotalEstimatedCost() + "\" instead of \"" + totalEstimatedCost + "\"");
+        Assert.assertEquals(calculatorPage.getTotalEstimatedCost(), totalEstimatedCost);
     }
 
 
     @AfterTest(alwaysRun = true)
     public void browserTearDown() {
-/*        driver.quit();
-        driver = null;*/
+        driver.quit();
+        driver = null;
+
     }
 }

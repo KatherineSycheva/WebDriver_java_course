@@ -25,6 +25,13 @@ public class DriverSingleton {
                     driver = new EdgeDriver(options);
                     break;
                 }
+                case "firefox": {
+                    WebDriverManager.firefoxdriver().setup();
+                    FirefoxOptions options = new FirefoxOptions();
+                    options.setBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
+                    driver = new FirefoxDriver(options);
+                    break;
+                }
                 default: {
                     WebDriverManager.chromedriver().setup();
                     ChromeOptions options = new ChromeOptions();
@@ -32,15 +39,6 @@ public class DriverSingleton {
                     driver = new ChromeDriver(options);
                     break;
                 }
-/*
-                case "firefox": {
-                    System.setProperty("webdriver.chrome.driver", RESOURCE_PATH + "geckodriver.exe");
-                    FirefoxOptions options = new FirefoxOptions();
-                    options.setBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
-                    driver = new FirefoxDriver(options);
-                    break;
-                }
-*/
             }
             driver.manage().window().maximize();
         }

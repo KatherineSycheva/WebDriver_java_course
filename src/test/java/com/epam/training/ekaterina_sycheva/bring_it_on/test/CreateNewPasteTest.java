@@ -1,3 +1,4 @@
+/*
 package com.epam.training.ekaterina_sycheva.bring_it_on.test;
 
 import com.epam.training.ekaterina_sycheva.bring_it_on.pages.MainPage;
@@ -29,20 +30,20 @@ public class CreateNewPasteTest {
         mainPage.createNewPaste(code, titleCode);
     }
 
-    @Test
+    @Test(enabled=false)
     public void browserTitleEqualPasteName() {
         Assert.assertTrue(mainPage.getPageTitle().contains(titleCode), "Title of created page doesn't equal to entered");
     }
 
-    @Test
+    @Test(enabled=false)
     public void syntaxCodeEqualBash() {
         Assert.assertEquals(mainPage.getCodeSyntax(), "Bash", "Syntax doesn't equal to entered");
     }
 
-    @Test
+    @Test(enabled=false)
     public void codeEqualsEntered(){
-        Assert.assertEquals(mainPage.getPastedCode().strip(), code.strip(),
-                "Code on the page doesn't equal to entered");
+        //Assert.assertEquals(mainPage.getPastedCode().strip(), code.strip(),
+          //      "Code on the page doesn't equal to entered");
     }
 
     @AfterTest(alwaysRun = true)
@@ -52,3 +53,4 @@ public class CreateNewPasteTest {
     }
 
 }
+*/

@@ -11,6 +11,7 @@ xml suites для smoke тестов и всех тестов
 
 
 cd C:\test\java\WebDriver_java_course
-mvn -Dbrowser=chrome -Dsurefire.suiteXmlFiles=src/test/resources/testng-all.xml clean test
-mvn -Dbrowser=edge -Dsurefire.suiteXmlFiles=src/test/resources/testng-all.xml clean test
-mvn -Dbrowser=firefox -Dsurefire.suiteXmlFiles=src/test/resources/testng-all.xml clean test
+mvn -Dbrowser=chrome -Denvironment=qa -Dsurefire.suiteXmlFiles=src/test/resources/testng-hardcore.xml clean test
+mvn -Dbrowser=edge -Denvironment=qa -Dsurefire.suiteXmlFiles=src/test/resources/testng-hardcore.xml clean test
+mvn -Dbrowser=firefox -Denvironment=qa -Dsurefire.suiteXmlFiles=src/test/resources/testng-hardcore.xml clean test
+mvn -Dbrowser=edge -Denvironment=dev -Dsurefire.suiteXmlFiles=src/test/resources/testng-values.xml clean test

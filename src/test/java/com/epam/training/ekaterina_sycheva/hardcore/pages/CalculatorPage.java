@@ -1,5 +1,7 @@
 package com.epam.training.ekaterina_sycheva.hardcore.pages;
 
+import com.epam.training.ekaterina_sycheva.hardcore.model.ComputeEngineCalculator;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,49 +18,31 @@ public class CalculatorPage extends BasePage {
     private WebElement calculatorFrame;
     @FindBy(id = "myFrame")
     private  WebElement innerCalculatorFrame;
-    //@FindBy(css = "md-tab-item:has(div[title=\"Compute Engine\"])")
-    @FindBy(css = "md-tab-item[md-tab-id=\"1\"]")
+    @FindBy(css = "#tab-item-1")
     private WebElement computeEngine;
     @FindBy(name = "quantity")
     private WebElement inputNumberOfInstances;
     @FindBy(css = "md-select[ng-model=\"listingCtrl.computeServer.os\"]")
     private WebElement operatingSystemsList;
-    @FindBy(css = "md-option[value=\"free\"]")
-    private WebElement selectOperatingSystemType;
+    String selectOperatingSystemTypeCSS = "md-option[value=\"free\"]";
     @FindBy(css = "md-select[ng-model=\"listingCtrl.computeServer.class\"]")
     private WebElement provisioningModelsList;
-    @FindBy(css = "md-option[value=\"regular\"]")
-    private WebElement selectProvisioningModel;
     @FindBy(css = "md-select[ng-model=\"listingCtrl.computeServer.series\"]")
     private WebElement seriesList;
-    @FindBy(css = "md-option[value=\"n1\"]")
-    private WebElement selectSeries;
     @FindBy(css = "md-select[ng-model=\"listingCtrl.computeServer.instance\"]")
     private WebElement machineTypeList;
-    @FindBy(css = "md-option[value=\"CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8\"]")
-    private WebElement selectMachineType;
     @FindBy(css = "md-checkbox[ng-model=\"listingCtrl.computeServer.addGPUs\"]")
     private WebElement checkboxAddGPU;
     @FindBy(css = "md-select[ng-model=\"listingCtrl.computeServer.gpuType\"]")
     private WebElement gpuTypeList;
-    @FindBy(css = "md-option[value=\"NVIDIA_TESLA_V100\"]")
-    private WebElement selectGpuType;
     @FindBy(css = "md-select[ng-model=\"listingCtrl.computeServer.gpuCount\"]")
     private WebElement numberOfGpuList;
-    @FindBy(css = "md-option[ng-repeat=\"item in listingCtrl.supportedGpuNumbers[listingCtrl.computeServer.gpuType]\"][value=\"1\"]")
-    private WebElement selectNumberOfGpu;
     @FindBy(css = "md-select[ng-model=\"listingCtrl.computeServer.ssd\"]")
     private WebElement localSSDList;
-    @FindBy(css = "md-option[ng-repeat=\"item in listingCtrl.dynamicSsd.computeServer\"][value=\"2\"]")
-    private WebElement selectLocalSSD;
     @FindBy(css = "md-select[ng-model=\"listingCtrl.computeServer.location\"]")
     private WebElement datacenterLocationList;
-    @FindBy(css = "md-option[value=\"europe-west3\"][ng-repeat=\"item in listingCtrl.fullRegionList | filter:listingCtrl.inputRegionText.computeServer\"]")
-    private WebElement selectDatacenterLocation;
     @FindBy(css = "md-select[ng-model=\"listingCtrl.computeServer.cud\"]")
     private WebElement commitedUsageList;
-    @FindBy(css = ".md-select-menu-container.md-active.md-clickable > ._md > ._md > md-option[value=\"1\"]")
-    private WebElement selectCommitedUsage;
     @FindBy(xpath = "(//button[contains(text(), \"Add to Estimate\")])[1]")
     private WebElement buttonAddToEstimate;
     @FindBy(css = ".cpc-cart-total > .md-title > .ng-binding")
@@ -69,7 +53,16 @@ public class CalculatorPage extends BasePage {
     private WebElement fieldEmailEstimate;
     @FindBy(css = "form[name=\"emailForm\"] > md-dialog-actions > button:nth-child(2)")
     private WebElement buttonSendEmail;
-
+    @FindBy(xpath = "//md-list/md-list-item[4]/div[1]")
+    private WebElement enteredProvisioningModel;
+    @FindBy(xpath = "//md-list/md-list-item[5]/div[1]")
+    private WebElement enteredInstanceType;
+    @FindBy(xpath = "//md-list/md-list-item[1]/div[1]")
+    private WebElement enteredRegion;
+    @FindBy(xpath = "//md-list/md-list-item[7]/div[1]")
+    private WebElement enteredLocalSSD;
+    @FindBy(xpath = "//md-list/md-list-item[3]/div[1]")
+    private WebElement enteredCommitmentTerm;
 
     public CalculatorPage(WebDriver driver) {
         super(driver);
@@ -85,14 +78,14 @@ public class CalculatorPage extends BasePage {
     }
 
     private void clickComputeEngineButton() {
-        computeEngine = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(computeEngine));
+        computeEngine = new WebDriverWait(frameDriver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(computeEngine));
         computeEngine.click();
     }
 
-    private void enterDropDownListValuesToCalculator(WebElement openList, WebElement selectValue) {
+    private void enterDropDownListValuesToCalculator(WebElement openList, String selectValue) {
         openList.click();
         WebElement visibleSelectValue = new WebDriverWait(frameDriver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOf(selectValue));
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(selectValue)));
         visibleSelectValue.click();
     }
 
@@ -102,25 +95,47 @@ public class CalculatorPage extends BasePage {
         return cost;
     }
 
-    public void enterValuesToPricingCalculator(String numberOfInstances) {
+    public void enterValuesToPricingCalculator(ComputeEngineCalculator calculator) {
         this.clickComputeEngineButton();
-        inputNumberOfInstances.sendKeys(numberOfInstances);
-        this.enterDropDownListValuesToCalculator(operatingSystemsList, selectOperatingSystemType);
-        this.enterDropDownListValuesToCalculator(provisioningModelsList, selectProvisioningModel);
-        this.enterDropDownListValuesToCalculator(seriesList, selectSeries);
-        this.enterDropDownListValuesToCalculator(machineTypeList, selectMachineType);
-        checkboxAddGPU.click();
-        this.enterDropDownListValuesToCalculator(gpuTypeList, selectGpuType);
-        this.enterDropDownListValuesToCalculator(numberOfGpuList, selectNumberOfGpu);
-        this.enterDropDownListValuesToCalculator(localSSDList, selectLocalSSD);
-        this.enterDropDownListValuesToCalculator(datacenterLocationList, selectDatacenterLocation);
-        this.enterDropDownListValuesToCalculator(commitedUsageList, selectCommitedUsage);
+        inputNumberOfInstances.sendKeys(calculator.getNumberOfInstances());
+        this.enterDropDownListValuesToCalculator(operatingSystemsList, calculator.getOperatingSystemType());
+        this.enterDropDownListValuesToCalculator(provisioningModelsList, calculator.getProvisioningModel());
+        this.enterDropDownListValuesToCalculator(seriesList, calculator.getSeries());
+        this.enterDropDownListValuesToCalculator(machineTypeList, calculator.getMachineType());
+        if (calculator.getGpu() != null) {
+            checkboxAddGPU.click();
+        }
+        this.enterDropDownListValuesToCalculator(localSSDList, calculator.getLocalSSD());
+        this.enterDropDownListValuesToCalculator(datacenterLocationList, calculator.getDatacenterLocation());
+        this.enterDropDownListValuesToCalculator(commitedUsageList, calculator.getCommitedUsage());
         buttonAddToEstimate.click();
-        buttonEmailEstimate.click();
+        //buttonEmailEstimate.click();
     }
 
     public void sendEstimatedCostToMail(String email) {
         fieldEmailEstimate.sendKeys(email);
         buttonSendEmail.click();
+    }
+
+    public String getEnteredProvisioningModel() {
+        return enteredProvisioningModel.getText().substring(19).strip();
+    }
+
+    public String getEnteredInstanceType() {
+        String contentInstanceType =  enteredInstanceType.getText();
+        return contentInstanceType.substring(15, contentInstanceType.length() - 30).strip();
+    }
+
+    public String getEnteredRegion() {
+        return enteredRegion.getText().substring(8).strip();
+    }
+
+    public String getEnteredLocalSSD() {
+        String localSSDText = enteredLocalSSD.getText().strip();
+        return localSSDText.substring(11, localSSDText.length() - 31).strip();
+    }
+
+    public String getCommitmentTerm() {
+        return enteredCommitmentTerm.getText().strip().substring(17);
     }
 }

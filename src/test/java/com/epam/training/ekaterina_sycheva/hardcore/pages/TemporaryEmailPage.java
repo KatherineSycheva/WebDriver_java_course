@@ -1,6 +1,5 @@
 package com.epam.training.ekaterina_sycheva.hardcore.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -53,7 +52,7 @@ public class TemporaryEmailPage extends BasePage {
                 .until(ExpectedConditions.visibilityOf(numberOfMessagesInMail));
         String messages = numberOfMessagesInMail.getText();
         int counterOfClick = 0;
-        while ((messages.equals("0 mail")) && (counterOfClick < 1000)){
+        while ((messages.equals("0 mail")) && (counterOfClick < 100)){
             buttonRefresh.click();
             Thread.sleep(500);
             messages = numberOfMessagesInMail.getText();
