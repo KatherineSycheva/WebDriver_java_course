@@ -5,27 +5,26 @@ import com.epam.training.ekaterina_sycheva.hardcore.pages.CalculatorPage;
 import com.epam.training.ekaterina_sycheva.hardcore.pages.HomePage;
 import com.epam.training.ekaterina_sycheva.hardcore.service.CalculatorCreator;
 import com.epam.training.ekaterina_sycheva.hardcore.service.TestDataReader;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 
+
 public class PricingCalculatorEnteredValuesTest extends CommonConditions {
-    private static final Logger logger = LogManager.getRootLogger();
+    private TestDataReader testDataReader = new TestDataReader();
     private CalculatorPage calculatorPage;
-    private String textToSearch = TestDataReader.getTestData("testdata.textToSearch");
-    private String provisioningModel = TestDataReader.getTestData("testdata.enteredProvisioningModel");
-    private String instanceType = TestDataReader.getTestData("testdata.enteredMachineType");
-    private String region = TestDataReader.getTestData("testdata.enteredRegion");
-    private String localSsd = TestDataReader.getTestData("testdata.enteredLocalSSD");
-    private String commitmentTerm =TestDataReader.getTestData("testdata.enteredCommtedUsage");
+    private String textToSearch = testDataReader.readProperty("testdata.textToSearch");
+    private String provisioningModel = testDataReader.readProperty("testdata.enteredProvisioningModel");
+    private String instanceType = testDataReader.readProperty("testdata.enteredMachineType");
+    private String region = testDataReader.readProperty("testdata.enteredRegion");
+    private String localSsd = testDataReader.readProperty("testdata.enteredLocalSSD");
+    private String commitmentTerm = testDataReader.readProperty("testdata.enteredCommtedUsage");
 
     @BeforeClass
     private void searchCalculatorPage(){
         HomePage hp = new HomePage(driver);
-        calculatorPage = hp.openPage().findText(textToSearch);
+        calculatorPage = hp.findText(textToSearch);
         ComputeEngineCalculator calculator = CalculatorCreator.withCredentialsFromProperty();
         calculatorPage.enterValuesToPricingCalculator(calculator);
     }
@@ -55,4 +54,5 @@ public class PricingCalculatorEnteredValuesTest extends CommonConditions {
     public void checkEnteredCommitmentTerm() {
         Assert.assertEquals(calculatorPage.getCommitmentTerm(), commitmentTerm);
     }
+
 }

@@ -14,7 +14,7 @@ public class PricingCalculatorTest extends CommonConditions {
 
     private CalculatorPage calculatorPage;
     private TemporaryEmailPage temporaryEmailPage;
-    private String textToSearch = TestDataReader.getTestData("testdata.textToSearch");
+    private String textToSearch = new TestDataReader().readProperty("testdata.textToSearch");
     private String email;
     private String temporaryEmailPageHandle;
 
@@ -23,9 +23,10 @@ public class PricingCalculatorTest extends CommonConditions {
         email = temporaryEmailPage.openPage().generateEmail();
         temporaryEmailPageHandle = CommonConditions.getTabId();
         CommonConditions.openNewTab();
-        calculatorPage = new HomePage(driver).openPage().findText(textToSearch);
+        calculatorPage = new HomePage(driver).findText(textToSearch);
         ComputeEngineCalculator calculator = CalculatorCreator.withCredentialsFromProperty();
         calculatorPage.enterValuesToPricingCalculator(calculator);
+        calculatorPage.clickEmailEstimate();
         String totalEstimatedCost = calculatorPage.getTotalEstimatedCost();
         calculatorPage.sendEstimatedCostToMail(email);
         return totalEstimatedCost;

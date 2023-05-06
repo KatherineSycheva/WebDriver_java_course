@@ -1,6 +1,8 @@
 package com.epam.training.ekaterina_sycheva.hardcore.pages;
 
 import com.epam.training.ekaterina_sycheva.hardcore.model.ComputeEngineCalculator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,6 +15,8 @@ import java.time.Duration;
 
 public class CalculatorPage extends BasePage {
     private WebDriver frameDriver;
+    protected static final Logger logger = LogManager.getLogger(CalculatorPage.class);
+
 
     @FindBy(css = "devsite-iframe > iframe")
     private WebElement calculatorFrame;
@@ -74,6 +78,7 @@ public class CalculatorPage extends BasePage {
     @Override
     public CalculatorPage openPage()
     {
+        logger.info("Calculator page opened");
         return this;
     }
 
@@ -92,10 +97,12 @@ public class CalculatorPage extends BasePage {
     public String getTotalEstimatedCost() {
         String cost = totalEstimatedCost.getText().strip();
         cost = cost.substring(22, 34);
+        logger.info("Total estimated cost computed");
         return cost;
     }
 
     public void enterValuesToPricingCalculator(ComputeEngineCalculator calculator) {
+        logger.info("Entering test data to calculator:\n {}",calculator.toString());
         this.clickComputeEngineButton();
         inputNumberOfInstances.sendKeys(calculator.getNumberOfInstances());
         this.enterDropDownListValuesToCalculator(operatingSystemsList, calculator.getOperatingSystemType());
@@ -109,12 +116,17 @@ public class CalculatorPage extends BasePage {
         this.enterDropDownListValuesToCalculator(datacenterLocationList, calculator.getDatacenterLocation());
         this.enterDropDownListValuesToCalculator(commitedUsageList, calculator.getCommitedUsage());
         buttonAddToEstimate.click();
-        //buttonEmailEstimate.click();
+        logger.info("Values entered");
+    }
+
+    public void clickEmailEstimate() {
+        buttonEmailEstimate.click();
     }
 
     public void sendEstimatedCostToMail(String email) {
         fieldEmailEstimate.sendKeys(email);
         buttonSendEmail.click();
+        logger.info("Email sent");
     }
 
     public String getEnteredProvisioningModel() {

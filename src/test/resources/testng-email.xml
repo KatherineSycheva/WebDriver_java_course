@@ -1,11 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="All tests" verbose="1">
-    <test name="PricingCalculatorEnteredValuesTest"   >
-        <classes>
-            <class name="com.epam.training.ekaterina_sycheva.hardcore.test.PricingCalculatorEnteredValuesTest" />
-        </classes>
-    </test>
     <test name="PricingCalculatorTest"   >
         <classes>
             <class name="com.epam.training.ekaterina_sycheva.hardcore.test.PricingCalculatorTest" />

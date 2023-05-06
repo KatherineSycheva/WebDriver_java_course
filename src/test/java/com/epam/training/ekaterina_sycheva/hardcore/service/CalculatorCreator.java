@@ -19,17 +19,18 @@ public class CalculatorCreator {
 
 
     public static ComputeEngineCalculator withCredentialsFromProperty() {
-        return new ComputeEngineCalculator(TestDataReader.getTestData(TESTDATA_NUMBER_OF_INSTANCES),
-                TestDataReader.getTestData(TESTDATA_OPERATING_SYSTEM),
-                TestDataReader.getTestData(TESTDATA_PROVISIONING_MODEL),
-                TestDataReader.getTestData(TESTDATA_SERIES),
-                TestDataReader.getTestData(TESTDATA_MACHINE_TYPE),
-                TestDataReader.getTestData(TESTDATA_ADD_GPU),
-                TestDataReader.getTestData(TESTDATA_GPU_TYPE),
-                TestDataReader.getTestData(TESTDATA_NUMBER_OF_GPUS),
-                TestDataReader.getTestData(TESTDATA_LOCAL_SSD),
-                TestDataReader.getTestData(TESTDATA_DATACENTER_LOCATION_),
-                TestDataReader.getTestData(TESTDATA_COMMITED_USAGE)
+        TestDataReader testDataReader = new TestDataReader();
+        return new ComputeEngineCalculator(testDataReader.readProperty(TESTDATA_NUMBER_OF_INSTANCES),
+                testDataReader.readProperty(TESTDATA_OPERATING_SYSTEM),
+                testDataReader.readProperty(TESTDATA_PROVISIONING_MODEL),
+                testDataReader.readProperty(TESTDATA_SERIES),
+                testDataReader.readProperty(TESTDATA_MACHINE_TYPE),
+                testDataReader.readProperty(TESTDATA_ADD_GPU),
+                testDataReader.readProperty(TESTDATA_GPU_TYPE),
+                testDataReader.readProperty(TESTDATA_NUMBER_OF_GPUS),
+                testDataReader.readProperty(TESTDATA_LOCAL_SSD),
+                testDataReader.readProperty(TESTDATA_DATACENTER_LOCATION_),
+                testDataReader.readProperty(TESTDATA_COMMITED_USAGE)
                 );
     }
 }

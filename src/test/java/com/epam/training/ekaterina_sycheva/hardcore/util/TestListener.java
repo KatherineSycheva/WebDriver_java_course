@@ -1,6 +1,7 @@
 package com.epam.training.ekaterina_sycheva.hardcore.util;
 
 import com.epam.training.ekaterina_sycheva.hardcore.driver.DriverSingleton;
+import com.epam.training.ekaterina_sycheva.hardcore.service.TestDataReader;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,11 +16,15 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class TestListener implements ITestListener {
-    private Logger log = LogManager.getRootLogger();
+
+    protected static final Logger logger = LogManager.getLogger(TestDataReader.class);
+
     @Override
     public void onTestFailure(ITestResult result) {
+        logger.debug("Saving screenshort...");
         ITestListener.super.onTestFailure(result);
         saveScreenshot();
+        logger.debug("Screenshot saved");
     }
 
     private void saveScreenshot(){
@@ -32,7 +37,7 @@ public class TestListener implements ITestListener {
                             + getCurrentTimeAsString() +
                             ".png"));
         } catch (IOException e) {
-            log.error("Failed to save screenshot: " + e.getLocalizedMessage());
+            logger.error("Failed to save screenshot: " + e.getLocalizedMessage());
         }
     }
 

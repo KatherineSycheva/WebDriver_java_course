@@ -1,5 +1,8 @@
 package com.epam.training.ekaterina_sycheva.hardcore.pages;
 
+import com.epam.training.ekaterina_sycheva.hardcore.service.TestDataReader;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,6 +16,8 @@ import java.time.Duration;
 public class HomePage extends BasePage {
 
     private final String PAGE_URL = "https://cloud.google.com/";
+    protected static final Logger logger = LogManager.getLogger(HomePage.class);
+
     @FindBy(css = ".devsite-top-logo-row-middle > devsite-search")
     private WebElement loupeButton;
     @FindBy(name = "q")
@@ -48,7 +53,9 @@ public class HomePage extends BasePage {
     }
 
     public CalculatorPage findText(String textToFind) {
+        logger.info("Home page opened");
         this.openPage();
+        logger.info("The search is performed by the phrase {}", textToFind);
         this.openSearchField();
         this.enterTextToSearchField(textToFind);
         this.clickFirstResultOfSearch();

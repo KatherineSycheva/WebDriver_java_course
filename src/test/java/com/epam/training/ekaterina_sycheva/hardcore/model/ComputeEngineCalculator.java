@@ -31,7 +31,7 @@ public class ComputeEngineCalculator {
         this.series = series;
         this.machineType = machineType;
         this.gpu = gpu;
-        if (gpu == null) {
+        if (!gpu.equals(null)) {
             this.gpuType = gpuType;
             this.numberOfGpu = numberOfGpu;
         }
@@ -83,7 +83,7 @@ public class ComputeEngineCalculator {
     @Override
     public String toString() {
         String gpuInformation = "";
-        if (this.gpu != null) {
+        if (!this.gpu.equals(null)) {
             gpuInformation = "gpuType: " + this.gpuType +  "\n" +
                              "numberOfGpu: " + this.numberOfGpu + "\n";
         }
