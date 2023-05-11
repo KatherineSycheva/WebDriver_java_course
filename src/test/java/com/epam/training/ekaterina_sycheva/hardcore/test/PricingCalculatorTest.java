@@ -18,13 +18,15 @@ public class PricingCalculatorTest extends CommonConditions {
     private String email;
     private String temporaryEmailPageHandle;
 
+
     public String sendTotalEstimatedCostToMail() {
         temporaryEmailPage = new TemporaryEmailPage(driver);
         email = temporaryEmailPage.openPage().generateEmail();
         temporaryEmailPageHandle = CommonConditions.getTabId();
         CommonConditions.openNewTab();
-        calculatorPage = new HomePage(driver).findText(textToSearch);
+        calculatorPage = new HomePage(driver).openPage().findText(textToSearch);
         ComputeEngineCalculator calculator = CalculatorCreator.withCredentialsFromProperty();
+        calculatorPage.openPage().switchToInnerCalculatorFrame();
         calculatorPage.enterValuesToPricingCalculator(calculator);
         calculatorPage.clickEmailEstimate();
         String totalEstimatedCost = calculatorPage.getTotalEstimatedCost();

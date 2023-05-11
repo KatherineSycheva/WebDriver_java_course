@@ -1,6 +1,5 @@
 package com.epam.training.ekaterina_sycheva.hardcore.pages;
 
-import com.epam.training.ekaterina_sycheva.hardcore.service.TestDataReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Keys;
@@ -55,7 +54,7 @@ public class HomePage extends BasePage {
     public CalculatorPage findText(String textToFind) {
         logger.info("Home page opened");
         this.openPage();
-        logger.info("The search is performed by the phrase {}", textToFind);
+        logger.info("The search is performed by the phrase: \"{}\"", textToFind);
         this.openSearchField();
         this.enterTextToSearchField(textToFind);
         this.clickFirstResultOfSearch();

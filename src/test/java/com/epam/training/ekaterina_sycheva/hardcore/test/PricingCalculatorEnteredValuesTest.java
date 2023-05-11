@@ -7,6 +7,7 @@ import com.epam.training.ekaterina_sycheva.hardcore.service.CalculatorCreator;
 import com.epam.training.ekaterina_sycheva.hardcore.service.TestDataReader;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 
@@ -26,9 +27,14 @@ public class PricingCalculatorEnteredValuesTest extends CommonConditions {
         HomePage hp = new HomePage(driver);
         calculatorPage = hp.findText(textToSearch);
         ComputeEngineCalculator calculator = CalculatorCreator.withCredentialsFromProperty();
+        calculatorPage.openPage().switchToInnerCalculatorFrame();
         calculatorPage.enterValuesToPricingCalculator(calculator);
     }
 
+    @BeforeMethod
+    private void switchToFrame() {
+        calculatorPage.switchToInnerCalculatorFrame();
+    }
 
     @Test
     public void checkProvisioningModel(){

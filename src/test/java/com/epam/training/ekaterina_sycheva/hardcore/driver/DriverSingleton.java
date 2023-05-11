@@ -1,6 +1,5 @@
 package com.epam.training.ekaterina_sycheva.hardcore.driver;
 
-import com.epam.training.ekaterina_sycheva.hardcore.service.TestDataReader;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
@@ -16,9 +15,10 @@ import org.apache.logging.log4j.Logger;
 public class DriverSingleton {
 
     private static WebDriver driver;
+    private static String browser;
     protected static final Logger logger = LogManager.getLogger(DriverSingleton.class);
     public static WebDriver getDriver()  {
-        String browser = System.getProperty("browser");
+        browser = System.getProperty("browser");
         logger.debug("Entered browser is: {}", browser);
         logger.debug("Initializing driver...");
         if (driver == null)  {
@@ -33,7 +33,7 @@ public class DriverSingleton {
                 case "firefox": {
                     WebDriverManager.firefoxdriver().setup();
                     FirefoxOptions options = new FirefoxOptions();
-                    options.setBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
+                    options.setBinary("C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe");
                     driver = new FirefoxDriver(options);
                     break;
                 }

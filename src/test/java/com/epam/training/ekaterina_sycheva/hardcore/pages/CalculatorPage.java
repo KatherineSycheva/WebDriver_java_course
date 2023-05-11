@@ -15,6 +15,7 @@ import java.time.Duration;
 
 public class CalculatorPage extends BasePage {
     private WebDriver frameDriver;
+    private WebDriver innerFrameDriver;
     protected static final Logger logger = LogManager.getLogger(CalculatorPage.class);
 
 
@@ -71,19 +72,26 @@ public class CalculatorPage extends BasePage {
     public CalculatorPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver,this);
-        frameDriver = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(calculatorFrame));
-        frameDriver.switchTo().frame(innerCalculatorFrame);
     }
 
     @Override
     public CalculatorPage openPage()
     {
-        logger.info("Calculator page opened");
+        logger.info("Calculator page was opened");
         return this;
     }
 
+    public void switchToInnerCalculatorFrame() {
+        if (frameDriver != null)
+            frameDriver.switchTo().defaultContent();
+        if (innerFrameDriver != null)
+            innerFrameDriver.switchTo().defaultContent();
+        frameDriver = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(calculatorFrame));
+        innerFrameDriver = new WebDriverWait(frameDriver, Duration.ofSeconds(10)).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(innerCalculatorFrame));
+    }
+
     private void clickComputeEngineButton() {
-        computeEngine = new WebDriverWait(frameDriver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(computeEngine));
+        computeEngine = new WebDriverWait(innerFrameDriver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(computeEngine));
         computeEngine.click();
     }
 
@@ -102,7 +110,7 @@ public class CalculatorPage extends BasePage {
     }
 
     public void enterValuesToPricingCalculator(ComputeEngineCalculator calculator) {
-        logger.info("Entering test data to calculator:\n {}",calculator.toString());
+        logger.info("Entering test data to calculator...");
         this.clickComputeEngineButton();
         inputNumberOfInstances.sendKeys(calculator.getNumberOfInstances());
         this.enterDropDownListValuesToCalculator(operatingSystemsList, calculator.getOperatingSystemType());
@@ -116,7 +124,7 @@ public class CalculatorPage extends BasePage {
         this.enterDropDownListValuesToCalculator(datacenterLocationList, calculator.getDatacenterLocation());
         this.enterDropDownListValuesToCalculator(commitedUsageList, calculator.getCommitedUsage());
         buttonAddToEstimate.click();
-        logger.info("Values entered");
+        logger.info("Test data entered");
     }
 
     public void clickEmailEstimate() {
@@ -130,7 +138,9 @@ public class CalculatorPage extends BasePage {
     }
 
     public String getEnteredProvisioningModel() {
-        return enteredProvisioningModel.getText().substring(19).strip();
+        String enteredProvisioningModelText = enteredProvisioningModel.getText().substring(19).strip();
+        return enteredProvisioningModelText;
+
     }
 
     public String getEnteredInstanceType() {

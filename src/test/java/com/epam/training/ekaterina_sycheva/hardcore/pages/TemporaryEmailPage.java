@@ -13,9 +13,9 @@ import java.time.Duration;
 public class TemporaryEmailPage extends BasePage {
 
     private static final String PAGE_URL = "https://yopmail.com/";
-    protected static final Logger logger = LogManager.getLogger(CalculatorPage.class);
+    protected static final Logger logger = LogManager.getLogger(TemporaryEmailPage.class);
 
-    @FindBy(css = "a[title=\"Генератор Одноразовых адресов электронной почты создаёт новый адрес для вас за один клик!\"]")
+    @FindBy(css = "div[id = \"listeliens\"] > a[href=\"email-generator\"]")
     private WebElement emailGenerator;
     @FindBy(id = "geny")
     private WebElement generatedEmail;
@@ -41,14 +41,14 @@ public class TemporaryEmailPage extends BasePage {
     @Override
     public TemporaryEmailPage openPage(){
         driver.navigate().to(PAGE_URL);
-        logger.info("Page for email generating opened");
+        logger.info("Page for generating email opened");
         return this;
     }
 
     public String generateEmail()  {
-        this.openPage();
+        emailGenerator = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(emailGenerator));
         emailGenerator.click();
-        logger.info("Email generated: {}", generatedEmail.getText());
+        logger.info("Email generated");
         return generatedEmail.getText();
     }
 

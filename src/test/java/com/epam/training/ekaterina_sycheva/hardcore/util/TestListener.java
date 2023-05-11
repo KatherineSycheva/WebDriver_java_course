@@ -1,7 +1,6 @@
 package com.epam.training.ekaterina_sycheva.hardcore.util;
 
 import com.epam.training.ekaterina_sycheva.hardcore.driver.DriverSingleton;
-import com.epam.training.ekaterina_sycheva.hardcore.service.TestDataReader;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,17 +16,18 @@ import java.time.format.DateTimeFormatter;
 
 public class TestListener implements ITestListener {
 
-    protected static final Logger logger = LogManager.getLogger(TestDataReader.class);
+    protected static final Logger logger = LogManager.getLogger(TestListener.class);
 
     @Override
     public void onTestFailure(ITestResult result) {
-        logger.debug("Saving screenshort...");
+        logger.info("Saving screenshort...");
         ITestListener.super.onTestFailure(result);
         saveScreenshot();
-        logger.debug("Screenshot saved");
+        logger.info("Screenshot saved");
     }
 
     private void saveScreenshot(){
+        DriverSingleton.getDriver().switchTo().defaultContent();
         File screenCapture = ((TakesScreenshot) DriverSingleton
                 .getDriver())
                 .getScreenshotAs(OutputType.FILE);
