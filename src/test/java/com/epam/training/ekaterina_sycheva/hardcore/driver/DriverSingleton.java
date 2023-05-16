@@ -19,15 +19,17 @@ public class DriverSingleton {
     protected static final Logger logger = LogManager.getLogger(DriverSingleton.class);
     public static WebDriver getDriver()  {
         browser = System.getProperty("browser");
-        logger.debug("Entered browser is: {}", browser);
-        logger.debug("Initializing driver...");
+        logger.info("Entered browser is: {}", browser);
+        logger.info("Initializing driver...");
         if (driver == null)  {
             switch (browser) {
                 case "edge": {
                     WebDriverManager.edgedriver().setup();
+                    logger.info("Driver setup");
                     EdgeOptions options = new EdgeOptions();
                     options.addArguments("--remote-allow-origins=*");
                     driver = new EdgeDriver(options);
+                    logger.info("Driver initialized: {}", driver.toString());
                     break;
                 }
                 case "firefox": {
