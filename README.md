@@ -1,6 +1,6 @@
-# webDriver_java_course
-Задания по курсу "Webdriver" (EPAM Learning Digital Platform).
-При выполнении заданий использовались WebDriver, TestNG, PageObject, 
+# WebDriver
+     Задания по курсу "Webdriver" (EPAM Learn Digital Platform).
+     При выполнении заданий использовались WebDriver, TestNG, PageObject, 
 
 ## 1. I can win. Автоматизировать следующий сценарий:
      1) Открыть https://pastebin.com или аналогичный сервис в любом браузере
@@ -50,4 +50,13 @@
       13) Вернуться в калькулятор, в поле Email ввести адрес из предыдущего пункта
       14) Нажать SEND EMAIL
       15) Дождаться письма с рассчетом стоимости и проверить что Total Estimated Monthly Cost в письме совпадает с тем, что отображается в калькуляторе
-
+# Framework course (EPAM Learn Digital Platform)
+     Задача - построить фреймворк для автоматизации Hardcore задания из курса WebDriver.
+     В итоговом фреймворке использованы:
+          * webdrivermanager для управления коннекторам к браузерам
+          * Page Object / Page Factory для абстракций страниц
+          * Модель для бизнес-объектов необходимых сущностей
+          * properties файлы с тестовыми данным для разных окружений
+          * xml suites для отдельных тестов тестов и всех тестов
+          * При падении теста делается скриншот с датой и временем
+          
